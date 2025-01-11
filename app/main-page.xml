@@ -1,0 +1,63 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page">
+    <ActionBar title="MindEase" class="action-bar" flat="true">
+        <Label text="MindEase" class="text-2xl font-bold" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Greeting Card -->
+            <StackLayout class="card">
+                <Label text="Comment allez-vous aujourd'hui ?" class="text-2xl font-bold text-center mb-4 text-gray-800" />
+                
+                <!-- Mood Selection -->
+                <GridLayout rows="auto" columns="*, *, *, *, *" class="mb-6">
+                    <Button col="0" text="😄" tap="{{ onMoodSelect }}" class="mood-button mood-great" data-mood="great" />
+                    <Button col="1" text="🙂" tap="{{ onMoodSelect }}" class="mood-button mood-good" data-mood="good" />
+                    <Button col="2" text="😐" tap="{{ onMoodSelect }}" class="mood-button mood-okay" data-mood="okay" />
+                    <Button col="3" text="😕" tap="{{ onMoodSelect }}" class="mood-button mood-bad" data-mood="bad" />
+                    <Button col="4" text="😢" tap="{{ onMoodSelect }}" class="mood-button mood-awful" data-mood="awful" />
+                </GridLayout>
+            </StackLayout>
+
+            <!-- Mood History Card -->
+            <StackLayout class="card mt-4">
+                <Label text="Historique de l'humeur" class="text-xl font-bold mb-2 text-gray-800" />
+                
+                <!-- Mood Chart -->
+                <GridLayout rows="auto, auto" columns="auto, *, auto" class="mb-4">
+                    <Label row="0" col="0" text="Humeur" class="text-sm text-gray-600" />
+                    <Label row="0" col="2" text="Date" class="text-sm text-gray-600" />
+                    
+                    <ListView row="1" col="0" colSpan="3" items="{{ moodEntries }}" height="200" class="mood-chart">
+                        <ListView.itemTemplate>
+                            <GridLayout columns="auto, *, auto" class="mood-chart-item">
+                                <Label col="0" text="{{ moodEmoji }}" class="text-2xl" />
+                                <StackLayout col="1" class="mx-2">
+                                    <Progress value="{{ moodValue }}" maxValue="5" class="mood-progress" />
+                                </StackLayout>
+                                <Label col="2" text="{{ formattedDate }}" class="text-sm text-gray-600" />
+                            </GridLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </GridLayout>
+
+                <!-- Today's Summary -->
+                <StackLayout class="mt-2">
+                    <Label text="{{ todaySummary }}" class="text-gray-600" textWrap="true" />
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Quick Actions -->
+            <GridLayout rows="auto, auto" columns="*, *" class="mt-4">
+                <Button text="🫁 Exercice Respiratoire" tap="{{ onBreathingExercise }}" 
+                    class="quick-action-button bg-blue-500" row="0" col="0" />
+                <Button text="📝 Journal Quotidien" tap="{{ onJournal }}" 
+                    class="quick-action-button bg-green-500" row="0" col="1" />
+                <Button text="🧘‍♂️ Méditation" tap="{{ onMeditation }}" 
+                    class="quick-action-button bg-purple-500" row="1" col="0" />
+                <Button text="👥 Communauté" tap="{{ onCommunity }}" 
+                    class="quick-action-button bg-orange-500" row="1" col="1" />
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

@@ -1,0 +1,50 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+    <ActionBar title="Daily Journal" class="bg-green-500 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+        <ActionItem 
+            ios.position="right" 
+            android.position="actionBar"
+            tap="{{ onSaveEntry }}"
+            text="Save" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Date Selection -->
+            <Label text="{{ currentDate }}" class="text-lg text-center mb-2" />
+            
+            <!-- Prompts and Entry Fields -->
+            <Label text="How are you feeling?" class="text-lg font-bold mt-4" />
+            <TextView 
+                text="{{ feelingsEntry }}" 
+                hint="Share your thoughts and feelings..."
+                class="border rounded-lg p-4 mb-4 h-32" 
+                textWrap="true" />
+            
+            <Label text="What's on your mind?" class="text-lg font-bold" />
+            <TextView 
+                text="{{ thoughtsEntry }}" 
+                hint="Write about your thoughts, worries, or goals..."
+                class="border rounded-lg p-4 mb-4 h-32" 
+                textWrap="true" />
+            
+            <Label text="Gratitude" class="text-lg font-bold" />
+            <TextView 
+                text="{{ gratitudeEntry }}" 
+                hint="What are you grateful for today?"
+                class="border rounded-lg p-4 mb-4 h-32" 
+                textWrap="true" />
+            
+            <!-- Journal History -->
+            <Label text="Previous Entries" class="text-xl font-bold mt-4 mb-2" />
+            <ListView items="{{ journalEntries }}" class="list-group" height="200">
+                <ListView.itemTemplate>
+                    <StackLayout class="list-group-item">
+                        <Label text="{{ date }}" class="font-bold" />
+                        <Label text="{{ preview }}" textWrap="true" />
+                    </StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</Page>

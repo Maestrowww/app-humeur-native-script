@@ -1,0 +1,44 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+    <ActionBar title="Breathing Exercise" class="bg-blue-500 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+    
+    <StackLayout class="p-4">
+        <Label text="{{ instructions }}" class="text-xl text-center mb-4" textWrap="true" />
+        
+        <GridLayout rows="auto, *" columns="*" class="mb-4">
+            <!-- Breathing Circle Animation -->
+            <ContentView row="0" class="m-4">
+                <AbsoluteLayout>
+                    <ContentView id="breathCircle" 
+                        left="0" top="0" width="300" height="300"
+                        class="rounded-full bg-blue-200 opacity-80"
+                        scaleX="{{ circleScale }}" scaleY="{{ circleScale }}"
+                        horizontalAlignment="center" verticalAlignment="center" />
+                </AbsoluteLayout>
+            </ContentView>
+            
+            <!-- Timer and Controls -->
+            <StackLayout row="1" class="mt-4">
+                <Label text="{{ timerText }}" class="text-6xl text-center mb-4" />
+                <Button text="{{ isExerciseActive ? 'Stop' : 'Start' }}" 
+                    tap="{{ toggleExercise }}"
+                    class="{{ isExerciseActive ? 'bg-red-500' : 'bg-green-500' }} text-white p-4 rounded-lg" />
+                
+                <!-- Exercise Settings -->
+                <GridLayout rows="auto" columns="*, *" class="mt-4">
+                    <StackLayout col="0" class="p-2">
+                        <Label text="Duration (mins)" class="text-center" />
+                        <TextField text="{{ duration }}" keyboardType="number" 
+                            class="text-center p-2 border rounded-lg" />
+                    </StackLayout>
+                    <StackLayout col="1" class="p-2">
+                        <Label text="Breath Cycle (secs)" class="text-center" />
+                        <TextField text="{{ breathCycle }}" keyboardType="number"
+                            class="text-center p-2 border rounded-lg" />
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </GridLayout>
+    </StackLayout>
+</Page>

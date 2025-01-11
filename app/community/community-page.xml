@@ -1,0 +1,51 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+    <ActionBar title="Community" class="bg-orange-500 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+        <ActionItem 
+            ios.position="right" 
+            android.position="actionBar"
+            tap="{{ onNewPost }}"
+            text="New Post" />
+    </ActionBar>
+    
+    <GridLayout rows="*, auto">
+        <!-- Posts List -->
+        <ListView row="0" items="{{ posts }}" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout rows="auto, auto, auto" columns="auto, *" class="p-4 border-b border-gray-200">
+                    <!-- Avatar and Username -->
+                    <Label col="0" rowSpan="2" text="👤" class="text-2xl mr-2" />
+                    <Label col="1" row="0" text="{{ username }}" class="font-bold" />
+                    <Label col="1" row="1" text="{{ timeAgo }}" class="text-sm text-gray-500" />
+                    
+                    <!-- Post Content -->
+                    <StackLayout col="0" row="2" colSpan="2" class="mt-2">
+                        <Label text="{{ content }}" textWrap="true" class="mb-2" />
+                        
+                        <!-- Interaction Buttons -->
+                        <GridLayout columns="auto, auto, *" class="mt-2">
+                            <Button col="0" text="❤️ {{ likes }}" 
+                                tap="{{ $parents['ListView'].onLikePost }}"
+                                class="bg-transparent border-0" />
+                            <Button col="1" text="💬 {{ comments.length }}" 
+                                tap="{{ $parents['ListView'].onViewComments }}"
+                                class="bg-transparent border-0" />
+                        </GridLayout>
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <!-- Quick Post Input -->
+        <GridLayout row="1" columns="*, auto" class="p-4 border-t border-gray-200 bg-white">
+            <TextField col="0" 
+                text="{{ newPostText }}" 
+                hint="Share your thoughts..."
+                class="border rounded-lg p-2" />
+            <Button col="1" 
+                text="Post" 
+                tap="{{ onQuickPost }}"
+                class="bg-orange-500 text-white ml-2 px-4" />
+        </GridLayout>
+    </GridLayout>
+</Page>
